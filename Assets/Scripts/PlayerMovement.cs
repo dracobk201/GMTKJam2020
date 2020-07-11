@@ -26,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        Vector3 targetPosition = _playerRigidbody.position + new Vector3(horizontalAxis.Value, 0, verticalAxis.Value) * moveSpeed.Value * Time.deltaTime;
-        _playerRigidbody.MovePosition(targetPosition);
+        _playerRigidbody.position += _playerRigidbody.transform.forward * verticalAxis.Value * Time.deltaTime * moveSpeed.Value;
+        _playerRigidbody.position += _playerRigidbody.transform.right * horizontalAxis.Value * Time.deltaTime * moveSpeed.Value;
     }
 
     public void Rotate()
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CameraRotation()
     {
-        _playerRigidbody.rotation = Quaternion.Euler(0, rotAroundY, 0);
+        _playerRigidbody.rotation = Quaternion.Euler(-_rotAroundX, rotAroundY, 0);
         playerCamera.transform.rotation = Quaternion.Euler(-_rotAroundX, rotAroundY, 0);
     }
 

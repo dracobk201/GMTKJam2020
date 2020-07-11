@@ -69,11 +69,12 @@ public class ControllerHandler : MonoBehaviour
 
     private void CheckingHorizontalAxis()
     {
-        if (Input.GetAxisRaw(Global.HorizontalAxis) < 0 && !_isHorizontalAxisInUse)
-            LeftDirectionActions();
-        else if (Input.GetAxisRaw(Global.HorizontalAxis) > 0 && !_isHorizontalAxisInUse)
-            RightDirectionActions();
-        else if (Math.Abs(Input.GetAxisRaw(Global.HorizontalAxis)) < Global.Tolerance)
+        var axisValue = Input.GetAxisRaw(Global.HorizontalAxis);
+        if (axisValue < 0 && !_isHorizontalAxisInUse)
+            LeftDirectionActions(axisValue);
+        else if (axisValue > 0 && !_isHorizontalAxisInUse)
+            RightDirectionActions(axisValue);
+        else if (Math.Abs(axisValue) < Global.Tolerance)
             NoHorizontalActions();
     }
 
@@ -85,18 +86,18 @@ public class ControllerHandler : MonoBehaviour
         nonHorizontalAxisEvent.Raise();
     }
 
-    private void RightDirectionActions()
+    private void RightDirectionActions(float value)
     {
-        horizontalAxis.Value = 1;
+        horizontalAxis.Value = value;
         if (horizontalSinglePress.Value)
             _isHorizontalAxisInUse = true;
         rightButtonEvent.Raise();
         anyDirectionalAxisEvent.Raise();
     }
 
-    private void LeftDirectionActions()
+    private void LeftDirectionActions(float value)
     {
-        horizontalAxis.Value = -1;
+        horizontalAxis.Value = value;
         if (horizontalSinglePress.Value)
             _isHorizontalAxisInUse = true;
         leftButtonEvent.Raise();
@@ -108,11 +109,12 @@ public class ControllerHandler : MonoBehaviour
     #region Vertical Functions
     private void CheckingVerticalAxis()
     {
-        if (Input.GetAxisRaw(Global.VerticalAxis) < 0 && !_isVerticalAxisInUse)
-            DownDirectionActions();
-        else if (Input.GetAxisRaw(Global.VerticalAxis) > 0 && !_isVerticalAxisInUse)
-            UpDirectionActions();
-        else if (Math.Abs(Input.GetAxisRaw(Global.VerticalAxis)) < Global.Tolerance)
+        var axisValue = Input.GetAxisRaw(Global.VerticalAxis);
+        if (axisValue < 0 && !_isVerticalAxisInUse)
+            DownDirectionActions(axisValue);
+        else if (axisValue > 0 && !_isVerticalAxisInUse)
+            UpDirectionActions(axisValue);
+        else if (Math.Abs(axisValue) < Global.Tolerance)
             NoVerticalActions();
     }
 
@@ -124,18 +126,18 @@ public class ControllerHandler : MonoBehaviour
         nonVerticalAxisEvent.Raise();
     }
 
-    private void UpDirectionActions()
+    private void UpDirectionActions(float value)
     {
-        verticalAxis.Value = 1;
+        verticalAxis.Value = value;
         if (verticalSinglePress.Value)
             _isVerticalAxisInUse = true;
         upButtonEvent.Raise();
         anyDirectionalAxisEvent.Raise();
     }
 
-    private void DownDirectionActions()
+    private void DownDirectionActions(float value)
     {
-        verticalAxis.Value = -1;
+        verticalAxis.Value = value;
         if (verticalSinglePress.Value)
             _isVerticalAxisInUse = true;
         downButtonEvent.Raise();
