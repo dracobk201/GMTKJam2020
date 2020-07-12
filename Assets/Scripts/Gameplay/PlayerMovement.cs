@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
         _playerRigidbody = TryGetComponent(out Rigidbody rigidbodyResult) ? rigidbodyResult : new Rigidbody();
     }
 
