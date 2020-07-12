@@ -2,7 +2,7 @@
 {
     #region Tags
     public const string PlayerTag = "Player";
-    public const string EnemyTag = "Enemy";
+    public const string MessageTag = "Message";
     public const string GroundTag = "Enemy";
     #endregion
 
@@ -15,6 +15,7 @@
     public const string StartAxis = "Submit";
     public const string QuitAxis = "Cancel";
     public const string FireAxis = "Fire1";
+    public const string SecondFireAxis = "Fire2";
     #endregion
 
     #region Scene Names

@@ -173,6 +173,8 @@ MonoBehaviour:
   startButtonEvent: {fileID: 11400000, guid: cc1fb3491f60c914abf70d15a244d3e2, type: 2}
   quitButtonEvent: {fileID: 11400000, guid: 40148d6a17cde2b48a16e62cd67dbdf9, type: 2}
   fireButtonEvent: {fileID: 11400000, guid: bdff2087299eb204aaa98196d178e0cd, type: 2}
+  secondFireButtonEvent: {fileID: 11400000, guid: c687134e26d2dbd4a8b89f3f83f94f56,
+    type: 2}
   confirmButtonEvent: {fileID: 11400000, guid: 9d8c3c5206346104d9a1dee5ceaab4d5, type: 2}
   uiPanelActive:
     useVariable: 1

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private BoolReference playerCaughtAMessage = null;
     [SerializeField] private FloatReference moveSpeed = null;
     [SerializeField] private FloatReference traslationSpeed = null;
     [SerializeField] private FloatReference horizontalCameraSensitivity = null;
@@ -14,10 +15,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private FloatReference mouseVerticalAxis = null;
     [SerializeField] private Camera playerCamera = null;
 
+    private bool _havingACaughtableMessage;
     private float _rotAroundX, rotAroundY;
     private Vector3 _targetLocation;
     private Rigidbody _playerRigidbody;
-
+    private GameObject _messageCaughted;
+    private GameObject _messageToCaughted;
 
     private void Start()
     {
@@ -44,13 +47,28 @@ public class PlayerMovement : MonoBehaviour
         playerCamera.transform.rotation = Quaternion.Euler(-_rotAroundX, rotAroundY, 0);
     }
 
-    public void Shoot()
+    public void ShootGrapplerHook()
     {
         StopAllCoroutines();
         if (AimNewLocation())
         {
             StartCoroutine(TranslatePlayer(_targetLocation));
         }
+    }
+
+    public void CaughtMessage()
+    {
+        if (_messageToCaughted != null)
+        {
+            playerCaughtAMessage.Value = true;
+            _messageCaughted = _messageToCaughted;
+        }
+        else
+        {
+            playerCaughtAMessage.Value = false;
+            _messageCaughted = null;
+        }
+
     }
 
     private bool AimNewLocation()
@@ -80,4 +98,17 @@ public class PlayerMovement : MonoBehaviour
             distance = heading.magnitude;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Global.MessageTag))
+            _messageToCaughted = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(Global.MessageTag))
+            _messageToCaughted = null;
+    }
+
 }

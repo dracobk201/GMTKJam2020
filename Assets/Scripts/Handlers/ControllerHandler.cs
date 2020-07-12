@@ -41,11 +41,13 @@ public class ControllerHandler : MonoBehaviour
     [SerializeField] private GameEvent startButtonEvent = null;
     [SerializeField] private GameEvent quitButtonEvent = null;
     [SerializeField] private GameEvent fireButtonEvent = null;
+    [SerializeField] private GameEvent secondFireButtonEvent = null;
     [SerializeField] private GameEvent confirmButtonEvent = null;
 
     private bool _isStartAxisInUse = false;
     private bool _isQuitAxisInUse = false;
     private bool _isFireAxisInUse = false;
+    private bool _isSecondFireAxisInUse = false;
     private bool _isConfirmAxisInUse = false;
     #endregion
 
@@ -62,6 +64,7 @@ public class ControllerHandler : MonoBehaviour
         CheckingStartButton();
         CheckingQuitButton();
         CheckingFireButton();
+        CheckingSecondFireButton();
         CheckingConfirmButton();
     }
 
@@ -249,6 +252,17 @@ public class ControllerHandler : MonoBehaviour
         }
         else if (Math.Abs(Input.GetAxisRaw(Global.FireAxis)) < Global.Tolerance)
             _isFireAxisInUse = false;
+    }
+
+    private void CheckingSecondFireButton()
+    {
+        if (Input.GetAxisRaw(Global.SecondFireAxis) != 0 && !_isSecondFireAxisInUse)
+        {
+            secondFireButtonEvent.Raise();
+            _isSecondFireAxisInUse = true;
+        }
+        else if (Math.Abs(Input.GetAxisRaw(Global.SecondFireAxis)) < Global.Tolerance)
+            _isSecondFireAxisInUse = false;
     }
 
     private void CheckingConfirmButton()
